@@ -10,16 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	@IBOutlet weak var stackView: UIStackView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		
+		stackView.subviews.forEach {
+			$0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
+		}
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	
+	func tap(gesture: UITapGestureRecognizer) {
+		stackView.subviews.forEach {
+			$0.hidden = ($0 == gesture.view)
+		}
 	}
-
-
 }
 
